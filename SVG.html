@@ -1,0 +1,82 @@
+<html>
+<body >
+  <input type="radio" id="r1" name="W" onclick="changeImg()">W/H  442*589 <br>
+  <input type="radio" id="r2" name="W" onclick="changeImg()">W/H  564*564 <br>
+  <input type="radio" id="r3" name="W" onclick="changeImg()" >W/H 338*338 <br>
+  <style>
+    #img1 {
+        position: absolute;
+        left: 0px;
+        top:0px;
+        z-index: 1;
+        border:5px #FFAC55 solid;
+    }
+    #svg {
+        position: absolute;
+        left: 0px;
+        top:0px;
+        z-index: 2;
+        border:2px #000000 solid;
+       
+    }
+  </style>
+  <div style="position: relative;">
+     <img id="img1" src="pic1.jpg"/>
+     <svg id="svg">
+        <g id="g">
+            <text x="0" y="23" style="font: bold 30px sans-serif;">108316133</text>
+            <circle cx="15" cy="500" r="15" stroke="blue" stroke-width="0.5" fill="none" />
+            <ellipse cx="300" cy="500" rx="80" ry="50" style="fill:#ffffff; stroke:#EC5C97; stroke-width:2;"/>
+            <polygon points="0,589,50,500,100,589" style="fill:#ffffff; stroke:#EC5C97; stroke-width:2;" />
+            <line x1="90" y1="400" x2="190" y2="500" style="stroke:rgb(255,0,0);stroke-width:2" />
+        </g>
+     </svg> 
+  </div>
+</body>
+    <script type="text/javascript">
+        var count=0;
+        var Opw=1;
+        var Oph=1;
+        function changeImg() { 
+            if (document.getElementById("r1").checked == true) {
+                document.getElementById("img1").src = "pic1.jpg"  
+
+            }
+            if (document.getElementById("r2").checked == true) {
+                document.getElementById("img1").src = "pic2.jpg" 
+            }
+            if (document.getElementById("r3").checked == true) {
+                document.getElementById("img1").src = "pic3.jpg"
+            }
+        }    
+        document.getElementById("img1").onload = function() {
+            if(count==0)
+            {
+                count=1;
+                Opw=document.getElementById("img1").width;
+                Oph=document.getElementById("img1").height;
+            }
+            var svg= document.getElementById('svg');
+            var img=document.getElementById("img1");
+            var g=document.getElementById("g");
+            var imgWidth=img.width;
+            var imgHeight=img.height;
+            var scaleWidth=1;
+            var scaleHeight=1;
+            console.log("imgW:"+imgWidth);
+            console.log("imgH:"+imgHeight);
+            console.log("Opw:"+Opw);
+            console.log("Oph:"+Oph);
+            svg.style.width=imgWidth;
+            svg.style.height=imgHeight;
+
+            scaleWidth=imgWidth/Opw;
+            scaleHeight=imgHeight/Oph;
+
+            console.log("scaleWidth:"+scaleWidth);
+            console.log("scaleHeight:"+scaleHeight);
+            g.setAttribute("transform","scale("+scaleWidth+", "+scaleHeight+")");
+        };
+    </script>
+
+</html>
